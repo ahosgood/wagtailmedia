@@ -10,6 +10,27 @@
 
 - Updated the `download_url` format to match images in Wagtail, removing the domain part from the URL (#254)
 
+## [0.17.1] - 2025-09-01
+
+### Fixed
+
+- Tabs not initialising for Wagtail < 7.1
+
+## [0.17.0] - 2025-08-20
+
+### Added
+
+- Support for Wagtail 7.1 ([#262](https://github.com/torchbox/wagtailmedia/pull/262)) @damwaingames
+
+### Fixed
+
+- Pagination when using typed choosers ([#260](https://github.com/torchbox/wagtailmedia/pull/260)) @WilliamHenryTanza
+
+### Changed
+
+- Use the new Tabs controller with Wagtail 7.1  @zerolab
+  This no longer includes the modified `tabs.js` as a workaround.
+
 ## [0.16.0] - 2025-05-06
 
 ### Added
@@ -333,6 +354,8 @@ Initial release
 ---
 
 [unreleased]: https://github.com/torchbox/wagtailmedia/compare/v0.16.0...HEAD
+[0.17.1]: https://github.com/torchbox/wagtailmedia/compare/v0.17.0...v0.17.1
+[0.17.0]: https://github.com/torchbox/wagtailmedia/compare/v0.16.0...v0.17.0
 [0.16.0]: https://github.com/torchbox/wagtailmedia/compare/v0.15.2...v0.16.0
 [0.15.2]: https://github.com/torchbox/wagtailmedia/compare/v0.15.1...v0.15.2
 [0.15.1]: https://github.com/torchbox/wagtailmedia/compare/v0.15.0...v0.15.1

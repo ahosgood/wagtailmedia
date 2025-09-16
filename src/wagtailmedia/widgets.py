@@ -4,9 +4,15 @@ from django import forms
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
+from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.admin.staticfiles import versioned_static
 from wagtail.admin.widgets import BaseChooser, BaseChooserAdapter
-from wagtail.telepath import register
+
+
+if WAGTAIL_VERSION >= (7, 1):
+    from wagtail.admin.telepath import register
+else:
+    from wagtail.telepath import register
 
 from wagtailmedia.models import get_media_model
 
@@ -39,13 +45,13 @@ class AdminMediaChooser(BaseChooser):
 
     @property
     def media(self):
-        return forms.Media(
-            js=[
-                "wagtailmedia/js/tabs.js",
-                "wagtailmedia/js/media-chooser-modal.js",
-                "wagtailmedia/js/media-chooser.js",
-            ]
-        )
+        tab_js = [] if WAGTAIL_VERSION >= (7, 1) else ["wagtailmedia/js/tabs.js"]
+        js = [
+            *tab_js,
+            "wagtailmedia/js/media-chooser-modal.js",
+            "wagtailmedia/js/media-chooser.js",
+        ]
+        return forms.Media(js=js)
 
 
 class AdminAudioChooser(AdminMediaChooser):
