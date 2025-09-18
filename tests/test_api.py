@@ -76,7 +76,9 @@ class TestApiMediaListing(ApiTestBase):
             # Check download_url
             self.assertEqual(item["meta"]["download_url"], f"/media/{media.file}")
             # Check full_url
-            self.assertEqual(item["full_url"], f"http://localhost/media/{media.file}")
+            self.assertEqual(
+                item["full_url"], f"http://localhost:8020/media/{media.file}"
+            )
 
             self.assertEqual(item["media_type"], media.type)
 
@@ -143,7 +145,16 @@ class TestApiMediaListing(ApiTestBase):
         for item in content["items"]:
             self.assertEqual(
                 set(item.keys()),
-                {"id", "meta", "title", "width", "height", "media_type", "collection"},
+                {
+                    "id",
+                    "meta",
+                    "title",
+                    "width",
+                    "height",
+                    "media_type",
+                    "full_url",
+                    "collection",
+                },
             )
             self.assertEqual(set(item["meta"].keys()), {"type", "detail_url", "tags"})
 
@@ -154,7 +165,15 @@ class TestApiMediaListing(ApiTestBase):
         for item in content["items"]:
             self.assertEqual(
                 set(item.keys()),
-                {"id", "title", "width", "height", "media_type", "collection"},
+                {
+                    "id",
+                    "title",
+                    "width",
+                    "height",
+                    "media_type",
+                    "full_url",
+                    "collection",
+                },
             )
 
     def test_remove_id_field(self):
@@ -164,7 +183,15 @@ class TestApiMediaListing(ApiTestBase):
         for item in content["items"]:
             self.assertEqual(
                 set(item.keys()),
-                {"meta", "title", "width", "height", "media_type", "collection"},
+                {
+                    "meta",
+                    "title",
+                    "width",
+                    "height",
+                    "media_type",
+                    "full_url",
+                    "collection",
+                },
             )
 
     def test_all_fields(self):
@@ -508,7 +535,7 @@ class TestApiMediaDetail(ApiTestBase):
         self.assertIn("full_url", content)
         self.assertEqual(
             content["full_url"],
-            "http://localhost/media/media/2001_a_space_odyssey.mp4",
+            "http://localhost:8020/media/media/2001_a_space_odyssey.mp4",
         )
 
         # Check the title field
@@ -538,7 +565,7 @@ class TestApiMediaDetail(ApiTestBase):
         self.assertIn("full_url", content)
         self.assertEqual(
             content["full_url"],
-            "http://api.example.com/media/media/pink_floyd_time.mp3",
+            "http://localhost:8020/media/media/pink_floyd_time.mp3",
         )
 
     # FIELDS
